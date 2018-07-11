@@ -4,18 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Item;
+use App\Mail\Mail;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-//    public function __construct()
-//    {
-//        $this->middleware('auth');
-//    }
+    public $id;
 
     /**
      * Show the application dashboard.
@@ -41,7 +35,21 @@ class HomeController extends Controller
         return view('category', ['items' => $items, 'category' => $category->title]);
     }
 
-    public function about(){
+    public function about()
+    {
         return view('about');
     }
+
+    public function order(Request $request)
+    {
+        $this->id = $request->id;
+        return view('order');
+    }
+
+    public function mail(Request $request)
+    {
+        $this->validate($request, [
+            'name'	=>	'required',
+            'email'	=>	'required|email',
+        ]);
 }

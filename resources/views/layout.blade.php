@@ -25,27 +25,38 @@
             </div>
         </div>
         <div class="header-container">
-            <div class="payment-container">
-                <div class="payment-basket__status">
-                    <div class="payment-basket__status__icon-block"><a class="payment-basket__status__icon-block__link"><i
-                                    class="fa fa-shopping-basket"></i></a></div>
-                    <div class="payment-basket__status__basket"><span
-                                class="payment-basket__status__basket-value">0</span><span
-                                class="payment-basket__status__basket-value-descr">товаров</span></div>
+            {{--<div class="payment-container">--}}
+            {{--<div class="payment-basket__status">--}}
+            {{--<div class="payment-basket__status__icon-block"><a class="payment-basket__status__icon-block__link"><i--}}
+            {{--class="fa fa-shopping-basket"></i></a></div>--}}
+            {{--<div class="payment-basket__status__basket"><span--}}
+            {{--class="payment-basket__status__basket-value">0</span><span--}}
+            {{--class="payment-basket__status__basket-value-descr">товаров</span></div>--}}
+            {{--</div>--}}
+            {{--</div>--}}
+            @auth
+                <div class="authorization-block">
+                    @if(Auth::user()->is_admin)
+                        <a href="/admin" class="authorization-block__link">Админка</a>
+                    @endif
+                    <a href="/logout" class="authorization-block__link">Выход</a>
                 </div>
-            </div>
-            <div class="authorization-block"><a href="#" class="authorization-block__link">Регистрация</a><a href="#"
-                                                                                                             class="authorization-block__link">Войти</a>
-            </div>
+            @endauth
+            @guest
+                <div class="authorization-block">
+                    <a href="/login" class="authorization-block__link">Войти</a>
+                    <a href="/register" class="authorization-block__link">Регистрация</a>
+                </div>
+            @endauth
         </div>
     </header>
     <div class="middle">
-@include('sidebar')
-    @yield('content')
+        @include('sidebar')
+        @yield('content')
     </div>
     <footer class="footer">
         <div class="footer__footer-content">
-     @include('random')
+            @include('random')
             <div class="footer__footer-content__main-content">
                 <p>
                     Интернет-магазин компьютерных игр ГЕЙМСМАРКЕТ - это

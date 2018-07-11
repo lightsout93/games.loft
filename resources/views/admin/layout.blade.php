@@ -32,7 +32,7 @@
         <section class="sidebar">
             <div class="user-panel">
                 <div class="pull-left image info">
-                    <p>Alexander Pierce</p>
+                    <p>{{Auth::user()->name}}</p>
                 </div>
             </div>
             <form action="#" method="get" class="sidebar-form">

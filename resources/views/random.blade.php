@@ -9,7 +9,7 @@
             <div class="item-product__description">
                 <div class="item-product__description__products-price"><span
                             class="products-price">{{$item->price}}</span></div>
-                <div class="item-product__description__btn-block"><a href="#"
+                <div class="item-product__description__btn-block"><a href="/order?id={{$item->id}}"
                                                                      class="btn btn-blue">Купить</a></div>
             </div>
         </div>

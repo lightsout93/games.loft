@@ -15,10 +15,22 @@ Route::get('/', 'HomeController@index')->name('/');
 Route::get('about', 'HomeController@about')->name('about');
 Route::get('item/{id}', 'HomeController@show')->name('item.show');
 Route::get('category/{id}', 'HomeController@category')->name('category.show');
+Route::get('/order', 'HomeController@order')->name('order');
+Route::post('/mail', 'ProfileController@mail');
 
-Auth::routes();
+Route::group(['middleware'	=>	'auth'], function(){
+    Route::get('/profile', 'ProfileController@index');
+    Route::post('/profile', 'ProfileController@store');
+    Route::get('/logout', 'AuthController@logout');
+});
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
+Route::group(['middleware'	=>	'guest'], function(){
+    Route::get('/register', 'AuthController@registerForm');
+    Route::post('/register', 'AuthController@register');
+    Route::get('/login','AuthController@loginForm')->name('login');
+    Route::post('/login', 'AuthController@login');
+});
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware'	=>	'admin'], function () {
     Route::get('/', 'DashboardController@index');
     Route::resource('/items', 'ItemsController');
     Route::resource('/categories', 'CategoriesController');
