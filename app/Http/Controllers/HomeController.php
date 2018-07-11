@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Item;
-use App\Mail\Mail;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -49,7 +48,8 @@ class HomeController extends Controller
     public function mail(Request $request)
     {
         $this->validate($request, [
-            'name'	=>	'required',
-            'email'	=>	'required|email',
+            'name' => 'required',
+            'email' => 'required|email',
         ]);
+    }
 }
